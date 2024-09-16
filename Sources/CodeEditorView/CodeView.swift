@@ -50,7 +50,7 @@ struct MessageInfo {
 typealias MessageViews = [LineInfo.MessageBundle.ID: MessageInfo]
 
 
-#if os(iOS) || os(visionOS)
+#if os(iOS) || os(visionOS) || os(tvOS)
 
 // MARK: -
 // MARK: UIKit version
@@ -1042,7 +1042,7 @@ extension CodeView {
       }
     }
 
-#if os(iOS) || os(visionOS)
+#if os(iOS) || os(visionOS) || os(tvOS)
     showsHorizontalScrollIndicator = !viewLayout.wrapText
     if viewLayout.wrapText && frame.size.width != visibleWidth { frame.size.width = visibleWidth }  // don't update frames in vain
 #elseif os(macOS)
@@ -1065,7 +1065,7 @@ extension CodeView {
     if textContainerInset.width != gutterWidth {
       textContainerInset = CGSize(width: gutterWidth, height: 0)
     }
-#elseif os(iOS) || os(visionOS)
+#elseif os(iOS) || os(visionOS) || os(tvOS)
     if textContainerInset.left != gutterWidth {
       textContainerInset = UIEdgeInsets(top: 0, left: gutterWidth, bottom: 0, right: 0)
     }
@@ -1115,7 +1115,7 @@ extension CodeView {
 
     let visibleHeight = documentVisibleRect.size.height
 
-#if os(iOS) || os(visionOS)
+#if os(iOS) || os(visionOS) || os(tvOS)
     // We need to force the scroll view (superclass of `UITextView`) to accomodate the whole content without scrolling
     // and to extent over the whole visible height. (On macOS, the latter is enforced by setting `minSize` in `tile()`.)
     let minimapMinimalHeight = max(minimapHeight, documentVisibleRect.height)
@@ -1255,7 +1255,7 @@ extension CodeView {
     // TODO: CodeEditor needs to be parameterised by message theme
     let messageTheme = Message.defaultTheme
 
-    #if os(iOS) || os(visionOS)
+    #if os(iOS) || os(visionOS) || os(tvOS)
     let background  = SwiftUI.Color(backgroundColor!)
     #elseif os(macOS)
     let background  = SwiftUI.Color(backgroundColor)
@@ -1384,7 +1384,7 @@ extension CodeView {
 
 final class CodeContainer: NSTextContainer {
 
-  #if os(iOS) || os(visionOS)
+  #if os(iOS) || os(visionOS) || os(tvOS)
   weak var textView: UITextView?
   #endif
 
