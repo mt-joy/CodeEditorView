@@ -268,7 +268,7 @@ extension Theme {
     }
   }
 
-  #if os(iOS) || os(visionOS)
+  #if os(iOS) || os(visionOS) || os(tvOS)
 
   /// Tint colour on the basis of the cursor and selection colour of the theme.
   ///
