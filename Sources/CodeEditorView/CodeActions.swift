@@ -15,7 +15,7 @@ import LanguageSupport
 private let logger = Logger(subsystem: "org.justtesting.CodeEditorView", category: "CodeActions")
 
 
-#if os(iOS) || os(visionOS)
+#if os(iOS) || os(visionOS) || os(tvOS)
 
 // MARK: -
 // MARK: UIKit version
