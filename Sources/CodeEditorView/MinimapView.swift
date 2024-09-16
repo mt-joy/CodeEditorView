@@ -54,9 +54,19 @@ class MinimapView: UITextView {
           || viewportRange!.contains(textLocation)
           || viewportRange!.endLocation.compare(textLocation) == .orderedSame
       {
-        drawBackgroundHighlight(within: rectWithinBounds,
-                                forLineContaining: textLocation,
-                                withColour: codeView?.theme.currentLineColour ?? .systemBackground)
+        #if os(tvOS) 
+         drawBackgroundHighlight(
+            within: rectWithinBounds,
+            forLineContaining: textLocation,
+            withColour: codeView?.theme.currentLineColour ?? .gray
+        )
+        #else
+        drawBackgroundHighlight(
+            within: rectWithinBounds,
+            forLineContaining: textLocation,
+            withColour: codeView?.theme.currentLineColour ?? .systemBackground
+        )
+        #endif
       }
     }
   }
@@ -134,7 +144,19 @@ class MinimapLineFragment: NSTextLineFragment {
     // Determine the advancement per glyph (assuming a monospaced font), scaling it down for the minimap.
     let font = if range.length > 0,
                   let font = attributedString.attribute(.font, at: range.location, effectiveRange: nil) as? OSFont { font }
-               else { OSFont.monospacedSystemFont(ofSize: OSFont.systemFontSize, weight: .regular) }
+               else { 
+                     #if os(tvOS)
+                     OSFont.monospacedSystemFont(
+                         ofSize: 14.0, 
+                         weight: .regular
+                     )
+                     #else
+                     OSFont.monospacedSystemFont(
+                         ofSize: OSFont.systemFontSize, 
+                         weight: .regular
+                     )
+                     #endif
+               }
     advancement = font.maximumHorizontalAdvancement / minimapRatio
 
     super.init(attributedString: attributedString, range: range)
