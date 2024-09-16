@@ -249,7 +249,9 @@ final class CodeView: UITextView {
     minimapView.isScrollEnabled                    = false
     minimapView.backgroundColor                    = theme.backgroundColour
     minimapView.tintColor                          = theme.tintColour
+    #if !os(tvOS)
     minimapView.isEditable                         = false
+    #endif
     minimapView.isSelectable                       = false
     minimapView.textContainerInset                 = .zero
     minimapView.textContainer.widthTracksTextView  = false    // we need to be able to control the size (see `tile()`)
@@ -1261,6 +1263,12 @@ extension CodeView {
     let background  = SwiftUI.Color(backgroundColor)
     #endif
 
+    #if os(tvOS)
+    let fontSize: CGFloat = 14.0
+    #else
+    let fontSize = font?.pointSize ?? OSFont.systemFontSize
+    #endif
+    
     let messageView = StatefulMessageView.HostingView(messages: messageBundle.messages,
                                                       theme: messageTheme,
                                                       background: background,
@@ -1268,7 +1276,7 @@ extension CodeView {
                                                                                      lineHeight: 15,
                                                                                      popupWidth: 300,
                                                                                      popupOffset: 16),
-                                                      fontSize: font?.pointSize ?? OSFont.systemFontSize,
+                                                      fontSize: fontSize,
                                                       colourScheme: theme.colourScheme),
         principalCategory = messagesByCategory(messageBundle.messages)[0].key,
         colour            = messageTheme(principalCategory).colour,
