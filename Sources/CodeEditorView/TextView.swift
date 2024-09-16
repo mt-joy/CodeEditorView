@@ -187,7 +187,7 @@ extension TextView {
 }
 
 
-#if os(iOS) || os(visionOS)
+#if os(iOS) || os(visionOS) || os(tvOS)
 
 // MARK: -
 // MARK: UIKit version
