@@ -355,7 +355,7 @@ extension CodeEditor: UIViewRepresentable {
   }
 
   public func makeCoordinator() -> Coordinator {
-    return Coordinator(text: $text, position: $position, setAction: setActions)
+    return Coordinator(text: $text, position: $position, setAction: setActions, setInfo: setInfo)
   }
 
   public final class Coordinator: _Coordinator {
