@@ -5,7 +5,7 @@
 //  Created by Manuel M T Chakravarty on 03/11/2020.
 
 import os
-#if os(iOS) || os(visionOS)
+#if os(iOS) || os(visionOS) || os(tvOS)
 import UIKit
 #elseif os(macOS)
 import AppKit
