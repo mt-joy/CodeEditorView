@@ -15,7 +15,7 @@ import LanguageSupport
 private let logger = Logger(subsystem: "org.justtesting.CodeEditorView", category: "GutterView")
 
 
-#if os(iOS) || os(visionOS)
+#if os(iOS) || os(visionOS) || os(tvOS)
 
 // MARK: -
 // MARK: UIKit version
@@ -191,7 +191,7 @@ extension GutterView {
           ]
       ]
     )
-    #if os(iOS) || os(visionOS)
+    #if os(iOS) || os(visionOS) || os(tvOS)
     let font = OSFont(descriptor: desc, size: 0)
     #elseif os(macOS)
     let font = OSFont(descriptor: desc, size: 0) ?? OSFont.systemFont(ofSize: 0)
